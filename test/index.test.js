@@ -21,7 +21,7 @@ import {
   atMax,
   inRange,
   matchesPattern,
-} from '../src/validators'
+} from '../src'
 
 const ERROR_CUSTOM = 'Custom error'
 
