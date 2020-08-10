@@ -14,7 +14,7 @@ import {
   atMin,
   atMax,
   inRange,
-} from '../src/validators'
+} from './validators'
 
 export {
   isRequired,
