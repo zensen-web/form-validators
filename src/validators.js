@@ -141,3 +141,10 @@ export function inRange (ext1, ext2, incMin = true, incMax = true, error = null)
     },
   }
 }
+
+export function matchesPattern (regex, error = 'Invalid') {
+  return {
+    error,
+    validate: v => !v || v.match(regex),
+  }
+}

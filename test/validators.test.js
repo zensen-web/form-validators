@@ -20,6 +20,7 @@ import {
   atMin,
   atMax,
   inRange,
+  matchesPattern,
 } from '../src/validators'
 
 const ERROR_CUSTOM = 'Custom error'
@@ -581,6 +582,32 @@ describe('validators', () => {
     context('when a custom error is provided', () => {
       beforeEach(() => {
         validator = inRange(0, 100, false, false, ERROR_CUSTOM)
+      })
+
+      it('sets the error message', () =>
+        expect(validator.error).to.be.eq(ERROR_CUSTOM))
+    })
+  })
+
+  describe('matchesPattern()', () => {
+    const ERR = 'NOPE'
+    const REGEX = /^\S*$/
+
+    const validate = (v, regex) =>
+      Boolean(matchesPattern(regex).validate(v))
+
+    it('sets the error message (for code coverage)', () =>
+      expect(matchesPattern(REGEX, ERR).error).to.be.eq(ERR))
+
+    it('fails when the patterns is not matched', () =>
+      expect(validate('as df', REGEX)).to.be.false)
+
+    it('passes when the patterns matches', () =>
+      expect(validate('asdf', REGEX)).to.be.true)
+
+    context('when a custom error is provided', () => {
+      beforeEach(() => {
+        validator = matchesPattern(REGEX, ERROR_CUSTOM)
       })
 
       it('sets the error message', () =>

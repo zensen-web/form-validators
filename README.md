@@ -55,3 +55,5 @@ This is a WIP package.
 ### atMax
 
 ### inRange
+
+### matchesPattern
