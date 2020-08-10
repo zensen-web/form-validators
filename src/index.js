@@ -14,6 +14,7 @@ import {
   atMin,
   atMax,
   inRange,
+  matchesPattern,
 } from './validators'
 
 export {
@@ -32,4 +33,5 @@ export {
   atMin,
   atMax,
   inRange,
+  matchesPattern,
 }
