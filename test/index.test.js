@@ -51,7 +51,7 @@ describe('validators', () => {
       expect(validate('')).to.be.false)
 
     it('fails when an empty numeric value is provided', () =>
-      expect(validate('00000')).to.be.false)
+      expect(validate(0)).to.be.false)
 
     it('fails when only whitespaces are provided', () =>
       expect(validate('    ')).to.be.false)
@@ -64,6 +64,9 @@ describe('validators', () => {
 
     it('passes when the array is non-empty', () =>
       expect(validate(['asdf'])).to.be.true)
+
+    it('passes when a valid numeric value is provided', () =>
+      expect(validate(1)).to.be.true)
 
     context('when a custom error is provided', () => {
       beforeEach(() => {
@@ -95,10 +98,13 @@ describe('validators', () => {
       expect(validate(NUMBER, '    ')).to.be.false)
 
     it('fails when an empty numeric value is provided', () =>
-      expect(validate(NUMBER, '00000')).to.be.false)
+      expect(validate(NUMBER, 0)).to.be.false)
 
     it('fails when only when dependency field is truthy', () =>
       expect(validate(NUMBER, '')).to.be.false)
+
+    it('passes when a valid numeric value is provided', () =>
+      expect(validate(NUMBER, 1)).to.be.true)
 
     it('passes when only the secondary field is truthy', () =>
       expect(validate('', TYPE)).to.be.true)
