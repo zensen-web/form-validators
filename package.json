@@ -1,6 +1,6 @@
 {
   "name": "@zensen/form-validators",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "license": "MIT",
   "description": "Validators for form-service",
   "main": "src/index.js",
