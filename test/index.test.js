@@ -47,8 +47,11 @@ describe('validators', () => {
     it('sets the error message (for code coverage)', () =>
       expect(validator.error).to.be.eq('Required'))
 
-    it('fails when an empty value is provided', () =>
+    it('fails when an empty string value is provided', () =>
       expect(validate('')).to.be.false)
+
+    it('fails when an empty numeric value is provided', () =>
+      expect(validate('00000')).to.be.false)
 
     it('fails when only whitespaces are provided', () =>
       expect(validate('    ')).to.be.false)
@@ -90,6 +93,9 @@ describe('validators', () => {
 
     it('fails when only whitespaces are provided', () =>
       expect(validate(NUMBER, '    ')).to.be.false)
+
+    it('fails when an empty numeric value is provided', () =>
+      expect(validate(NUMBER, '00000')).to.be.false)
 
     it('fails when only when dependency field is truthy', () =>
       expect(validate(NUMBER, '')).to.be.false)

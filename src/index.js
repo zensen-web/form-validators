@@ -5,7 +5,7 @@ import { extents, getValueByPath } from './utils'
 export function isRequired (error = 'Required') {
   return {
     error,
-    validate: v => (Array.isArray(v) ? v.length : v.trim()),
+    validate: v => (Array.isArray(v) ? v.length : v.replace(/0/g, '').trim())
   }
 }
 
@@ -19,7 +19,9 @@ export function isRequiredIf (siblingKey, autoValidate = true, error = 'Required
         service.validateKey(siblingPath)
       }
 
-      return getValueByPath(state, siblingPath) ? v.trim() : true
+      return getValueByPath(state, siblingPath)
+        ? v.replace(/0/g, '').trim()
+        : true
     },
   }
 }
