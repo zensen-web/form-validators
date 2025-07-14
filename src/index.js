@@ -7,7 +7,8 @@ export function isRequired (error = 'Required') {
     error,
     validate: v => (Array.isArray(v)
       ? v.length
-      : (typeof v === 'number' ? v : v.trim()))
+      : (typeof v === 'string' ? v.trim() : v)
+    )
   }
 }
 
@@ -22,7 +23,7 @@ export function isRequiredIf (siblingKey, autoValidate = true, error = 'Required
       }
 
       return getValueByPath(state, siblingPath)
-        ? (typeof v === 'number' ? v : v.trim())
+        ? (typeof v === 'string' ? v.trim() : v)
         : true
     },
   }
@@ -152,3 +153,25 @@ export function matchesPattern (regex, error = 'Invalid') {
     validate: v => !v || v.match(regex),
   }
 }
+
+// Default export for UMD compatibility
+const FormValidators = {
+  isRequired,
+  isRequiredIf,
+  isPropRequired,
+  isSsn,
+  isDate,
+  isDateBefore,
+  isDateAfter,
+  isEmailAddress,
+  isPhoneNumber,
+  isPostalCode,
+  hasLength,
+  hasDuplicate,
+  atMin,
+  atMax,
+  inRange,
+  matchesPattern,
+}
+
+export default FormValidators

@@ -22,6 +22,56 @@ Using `yarn`:
 $ yarn add @zensen/form-validators
 ```
 
+## CDN Usage
+
+You can also use this library via CDN:
+
+### jsDelivr (Recommended)
+
+```html
+<!-- UMD build -->
+<script src="https://cdn.jsdelivr.net/npm/@zensen/form-validators@1.0.8/build/index.umd.js"></script>
+
+<!-- ESM build -->
+<script type="module">
+  import FormValidators from 'https://cdn.jsdelivr.net/npm/@zensen/form-validators@1.0.8/build/index.esm.js'
+</script>
+```
+
+### unpkg
+
+```html
+<!-- UMD build -->
+<script src="https://unpkg.com/@zensen/form-validators@1.0.8/build/index.umd.js"></script>
+```
+
+## Usage
+
+### ES6 Modules
+
+```javascript
+import { isRequired, isEmailAddress } from '@zensen/form-validators'
+
+// Or import the default export
+import FormValidators from '@zensen/form-validators'
+```
+
+### CommonJS
+
+```javascript
+const { isRequired, isEmailAddress } = require('@zensen/form-validators')
+
+// Or require the default export
+const FormValidators = require('@zensen/form-validators')
+```
+
+### Browser (UMD)
+
+```javascript
+// Available as global FormValidators
+const { isRequired, isEmailAddress } = FormValidators
+```
+
 ## Validators
 
 This is a WIP package.

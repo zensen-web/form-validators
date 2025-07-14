@@ -47,11 +47,14 @@ describe('validators', () => {
     it('sets the error message (for code coverage)', () =>
       expect(validator.error).to.be.eq('Required'))
 
-    it('fails when an empty string value is provided', () =>
-      expect(validate('')).to.be.false)
+    it('fails when "false" is provided', () =>
+      expect(validate(false)).to.be.false)
 
-    it('fails when an empty numeric value is provided', () =>
+    it('fails when "0" is provided', () =>
       expect(validate(0)).to.be.false)
+
+    it('fails when an empty string is provided', () =>
+      expect(validate('')).to.be.false)
 
     it('fails when only whitespaces are provided', () =>
       expect(validate('    ')).to.be.false)
@@ -81,8 +84,9 @@ describe('validators', () => {
   describe('isRequiredIf()', () => {
     let service
 
-    const NUMBER = '(702) 555-1234'
+    const PHONE_NUMBER = '(702) 555-1234'
     const TYPE = 'Home'
+
     const validate = (number, type) =>
       Boolean(validator.validate(type, ['type'], { number, type }, service))
 
@@ -94,23 +98,29 @@ describe('validators', () => {
     it('sets the error message (for code coverage)', () =>
       expect(validator.error).to.be.eq('Required'))
 
-    it('fails when only whitespaces are provided', () =>
-      expect(validate(NUMBER, '    ')).to.be.false)
+    it('fails when "false" is provided', () =>
+      expect(validate(PHONE_NUMBER, false)).to.be.false)
 
-    it('fails when an empty numeric value is provided', () =>
-      expect(validate(NUMBER, 0)).to.be.false)
+    it('fails when an empty numeric value (0) is provided', () =>
+      expect(validate(PHONE_NUMBER, 0)).to.be.false)
+
+    it('fails when an empty string value is provided', () =>
+      expect(validate(PHONE_NUMBER, '')).to.be.false)
+
+    it('fails when only whitespaces are provided', () =>
+      expect(validate(PHONE_NUMBER, '    ')).to.be.false)
 
     it('fails when only when dependency field is truthy', () =>
-      expect(validate(NUMBER, '')).to.be.false)
+      expect(validate(PHONE_NUMBER, '')).to.be.false)
 
     it('passes when a valid numeric value is provided', () =>
-      expect(validate(NUMBER, 1)).to.be.true)
+      expect(validate(PHONE_NUMBER, 1)).to.be.true)
 
     it('passes when only the secondary field is truthy', () =>
       expect(validate('', TYPE)).to.be.true)
 
     it('passes when both fields are truthy', () =>
-      expect(validate(NUMBER, TYPE)).to.be.true)
+      expect(validate(PHONE_NUMBER, TYPE)).to.be.true)
 
     it('passes when both fields are falsy', () =>
       expect(validate('', '')).to.be.true)
@@ -130,7 +140,7 @@ describe('validators', () => {
       beforeEach(() => {
         validator = isRequiredIf('number', true, ERROR)
 
-        validate(NUMBER, '')
+        validate(PHONE_NUMBER, '')
       })
 
       it('sets error', () =>
@@ -144,7 +154,7 @@ describe('validators', () => {
       beforeEach(() => {
         validator = isRequiredIf('number', false)
 
-        validate(NUMBER, '')
+        validate(PHONE_NUMBER, '')
       })
 
       it('does not validate other key', () =>
